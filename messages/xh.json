@@ -1,1 +1,146 @@
-{}
+{
+  "common": {
+    "appName": "CSERI Community Intake",
+    "next": "Next",
+    "back": "Back",
+    "submit": "Submit",
+    "required": "Required",
+    "confidential": "Confidential — not published",
+    "step": "Step",
+    "of": "of"
+  },
+  "nav": {
+    "language": "Language",
+    "admin": "Admin"
+  },
+  "steps": {
+    "1": "Consent",
+    "2": "Role",
+    "3": "Contact",
+    "4": "Challenge",
+    "5": "Confirm"
+  },
+  "step1": {
+    "title": "Privacy & POPIA Consent",
+    "subtitle": "Your information is protected under the Protection of Personal Information Act (POPIA)",
+    "body": "CSERI (Centre for Social Entrepreneurship) at the Durban University of Technology collects your information solely to understand community challenges and match them to incubation programme solutions. Your contact details are confidential and will never be published or shared without your consent.",
+    "checkboxLabel": "I understand and consent to my information being collected and used as described above",
+    "error": "You must consent to continue"
+  },
+  "step2": {
+    "title": "Who are you?",
+    "subtitle": "Select the option that best describes you",
+    "community_member": "Community Member",
+    "business_owner": "Business Owner / SMME",
+    "cseri_rep": "CSERI Representative",
+    "error": "Please select a role to continue"
+  },
+  "step3": {
+    "title": "Contact Details",
+    "subtitle": "Your contact information is confidential and will not be published",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "organisation": "Organisation / Business Name",
+    "fullNameError": "Full name is required",
+    "emailError": "Please enter a valid email address"
+  },
+  "step4": {
+    "title": "Community Challenge",
+    "subtitle": "Tell us about the challenge your community is facing",
+    "challengeTitle": "Challenge Title",
+    "challengeDescription": "Challenge Description",
+    "challengeDescriptionHint": "Describe the problem in as much detail as possible",
+    "category": "Category",
+    "province": "Province",
+    "urgency": "Urgency Level",
+    "proposedSolution": "Proposed Solution (optional)",
+    "backgroundInfo": "Background Information (optional)",
+    "suitsIntlStudents": "This challenge could be addressed by international students",
+    "selectCategory": "Select a category",
+    "selectProvince": "Select a province",
+    "selectUrgency": "Select urgency level",
+    "titleError": "Challenge title is required",
+    "descriptionError": "Challenge description is required",
+    "categoryError": "Please select a category",
+    "provinceError": "Please select a province",
+    "urgencyError": "Please select an urgency level"
+  },
+  "step5": {
+    "title": "Submission Confirmed!",
+    "subtitle": "Thank you for submitting your community challenge. CSERI will review it and be in touch.",
+    "referenceLabel": "Your Reference Number",
+    "downloadPdf": "Download PDF",
+    "pdfNote": "PDF download available in the full version",
+    "newSubmission": "Submit Another Challenge",
+    "summaryTitle": "What happens next?",
+    "next1": "CSERI reviews your challenge submission",
+    "next2": "Your challenge is matched to relevant incubation programmes",
+    "next3": "A CSERI representative will contact you if a match is found"
+  },
+  "categories": {
+    "health": "Health",
+    "education": "Education",
+    "agriculture": "Agriculture",
+    "technology": "Technology",
+    "finance": "Finance",
+    "housing": "Housing",
+    "employment": "Employment",
+    "environment": "Environment",
+    "safety": "Safety",
+    "other": "Other"
+  },
+  "provinces": {
+    "ec": "Eastern Cape",
+    "fs": "Free State",
+    "gp": "Gauteng",
+    "kzn": "KwaZulu-Natal",
+    "lp": "Limpopo",
+    "mp": "Mpumalanga",
+    "nc": "Northern Cape",
+    "nw": "North West",
+    "wc": "Western Cape"
+  },
+  "urgency": {
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "critical": "Critical"
+  },
+  "admin": {
+    "title": "CSERI Admin Dashboard",
+    "loginTitle": "Admin Login",
+    "password": "Password",
+    "loginButton": "Sign In",
+    "logout": "Logout",
+    "total": "Total",
+    "new": "New",
+    "reviewing": "Reviewing",
+    "matched": "Matched",
+    "searchPlaceholder": "Search by reference, name, or description...",
+    "filterCategory": "Category",
+    "filterProvince": "Province",
+    "filterUrgency": "Urgency",
+    "filterStatus": "Status",
+    "allCategories": "All Categories",
+    "allProvinces": "All Provinces",
+    "allUrgencies": "All Urgencies",
+    "allStatuses": "All Statuses",
+    "colRef": "Reference",
+    "colDate": "Date",
+    "colRole": "Role",
+    "colCategory": "Category",
+    "colProvince": "Province",
+    "colUrgency": "Urgency",
+    "colStatus": "Status",
+    "noResults": "No submissions match your filters",
+    "exportCsv": "Export CSV",
+    "close": "Close",
+    "contactDetails": "Contact Details",
+    "challengeDetails": "Challenge Details",
+    "statusNew": "New",
+    "statusReviewing": "Reviewing",
+    "statusMatched": "Matched",
+    "statusClosed": "Closed"
+  }
+}
