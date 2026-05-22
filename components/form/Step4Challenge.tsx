@@ -20,7 +20,7 @@ export function Step4Challenge() {
   const tCat = useTranslations('categories')
   const tProv = useTranslations('provinces')
   const tUrg = useTranslations('urgency')
-  const { nextStep, prevStep, setChallenge, formData } = useFormContext()
+  const { prevStep, submitAndAdvance, formData, isSubmitting, submissionError } = useFormContext()
 
   const { register, handleSubmit, formState: { errors } } = useForm<Step4Input>({
     resolver: zodResolver(step4Schema),
@@ -47,9 +47,8 @@ export function Step4Challenge() {
         },
   })
 
-  function onSubmit(data: Step4Input) {
-    setChallenge(data as Step4Data)
-    nextStep()
+  async function onSubmit(data: Step4Input) {
+    await submitAndAdvance(data as Step4Data)
   }
 
   const categoryOptions = CATEGORIES.map((c) => ({ value: c, label: tCat(c) }))
@@ -112,9 +111,19 @@ export function Step4Challenge() {
         </label>
       </div>
 
+      {submissionError && (
+        <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-md px-3 py-2">
+          {submissionError}
+        </p>
+      )}
+
       <div className="flex justify-between">
-        <Button type="button" variant="outline" onClick={prevStep}>{tc('back')}</Button>
-        <Button type="submit">{tc('next')}</Button>
+        <Button type="button" variant="outline" onClick={prevStep} disabled={isSubmitting}>
+          {tc('back')}
+        </Button>
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? 'Submitting…' : tc('next')}
+        </Button>
       </div>
     </form>
   )

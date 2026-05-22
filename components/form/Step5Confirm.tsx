@@ -60,9 +60,20 @@ export function Step5Confirm() {
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <Button variant="outline" disabled title={t('pdfNote')}>
-          {t('downloadPdf')}
-        </Button>
+        {referenceNo ? (
+          <a
+            href={`/api/pdf/${referenceNo}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 border border-cseri-navy text-cseri-navy px-4 py-2 rounded-md text-sm font-medium hover:bg-cseri-navy hover:text-white transition-colors"
+          >
+            {t('downloadPdf')}
+          </a>
+        ) : (
+          <Button variant="outline" disabled title={t('pdfNote')}>
+            {t('downloadPdf')}
+          </Button>
+        )}
         <Button onClick={handleReset} variant="secondary">
           {t('newSubmission')}
         </Button>

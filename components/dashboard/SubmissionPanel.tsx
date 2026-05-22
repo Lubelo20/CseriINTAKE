@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import type { Submission } from '@/lib/mock-data'
 import { Badge } from '@/components/ui/Badge'
 
@@ -5,13 +8,31 @@ const URGENCY_BADGE: Record<string, 'red' | 'orange' | 'blue' | 'gray'> = {
   critical: 'red', high: 'orange', medium: 'blue', low: 'gray',
 }
 
+const ALL_STATUSES = ['new', 'reviewing', 'matched', 'closed'] as const
+type Status = (typeof ALL_STATUSES)[number]
+
 interface SubmissionPanelProps {
-  submission: Submission | null
+  submission: Submission
   onClose: () => void
+  onStatusChange?: (updated: Submission) => void
 }
 
-export function SubmissionPanel({ submission, onClose }: SubmissionPanelProps) {
-  if (!submission) return null
+export function SubmissionPanel({ submission, onClose, onStatusChange }: SubmissionPanelProps) {
+  const [updating, setUpdating] = useState(false)
+
+  async function handleStatusChange(status: Status) {
+    if (status === submission.status || updating) return
+    setUpdating(true)
+    const res = await fetch(`/api/submissions/${submission.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status }),
+    })
+    if (res.ok) {
+      onStatusChange?.({ ...submission, status })
+    }
+    setUpdating(false)
+  }
 
   return (
     <div className="fixed inset-y-0 right-0 w-full sm:w-[480px] bg-white shadow-2xl z-50 overflow-y-auto">
@@ -31,6 +52,26 @@ export function SubmissionPanel({ submission, onClose }: SubmissionPanelProps) {
           <Badge variant={submission.status === 'matched' ? 'green' : submission.status === 'closed' ? 'gray' : 'blue'}>
             {submission.status}
           </Badge>
+        </div>
+
+        <div>
+          <h3 className="text-xs font-semibold uppercase text-gray-400 mb-2">Update Status</h3>
+          <div className="flex flex-wrap gap-2">
+            {ALL_STATUSES.map((s) => (
+              <button
+                key={s}
+                onClick={() => handleStatusChange(s)}
+                disabled={s === submission.status || updating}
+                className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors
+                  ${s === submission.status
+                    ? 'bg-cseri-navy text-white border-cseri-navy cursor-default'
+                    : 'bg-white text-gray-600 border-gray-300 hover:border-cseri-navy hover:text-cseri-navy disabled:opacity-40'
+                  }`}
+              >
+                {s}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div>
@@ -70,6 +111,17 @@ export function SubmissionPanel({ submission, onClose }: SubmissionPanelProps) {
             ✓ Suitable for international student projects
           </div>
         )}
+
+        <div className="border-t pt-4">
+          <a
+            href={`/api/pdf/${submission.reference_no}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-cseri-blue underline hover:text-cseri-navy"
+          >
+            Download PDF (excludes contact details — POPIA compliant)
+          </a>
+        </div>
       </div>
     </div>
   )

@@ -4,4 +4,5 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 
 export default withNextIntl({
   transpilePackages: ['next-intl', 'use-intl'],
+  serverExternalPackages: ['@react-pdf/renderer'],
 })

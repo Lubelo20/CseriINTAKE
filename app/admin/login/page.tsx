@@ -3,20 +3,28 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-const DEMO_PASSWORD = 'cseri2026'
-
 export default function AdminLoginPage() {
   const router = useRouter()
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (password === DEMO_PASSWORD) {
-      sessionStorage.setItem('cseri_admin', '1')
+    setLoading(true)
+    setError('')
+
+    const res = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password }),
+    })
+
+    if (res.ok) {
       router.push('/admin/dashboard')
     } else {
       setError('Incorrect password. Please try again.')
+      setLoading(false)
     }
   }
 
@@ -51,9 +59,10 @@ export default function AdminLoginPage() {
 
           <button
             type="submit"
-            className="w-full bg-cseri-navy text-white py-2.5 rounded-md font-semibold text-sm hover:bg-blue-900 transition-colors"
+            disabled={loading}
+            className="w-full bg-cseri-navy text-white py-2.5 rounded-md font-semibold text-sm hover:bg-blue-900 transition-colors disabled:opacity-60"
           >
-            Sign In
+            {loading ? 'Signing in…' : 'Sign In'}
           </button>
         </form>
 

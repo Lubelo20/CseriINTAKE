@@ -19,7 +19,7 @@ export default async () => {
   return {
     ...jestConfig,
     transformIgnorePatterns: [
-      '/node_modules/(?!(next-intl|use-intl|intl-messageformat|@formatjs)/).*/',
+      '/node_modules/(?!(next-intl|use-intl|intl-messageformat|@formatjs|jose)/).*/',
       '^.+\\.module\\.(css|sass|scss)$',
     ],
   }

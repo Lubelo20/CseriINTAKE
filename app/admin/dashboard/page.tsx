@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import { MOCK_SUBMISSIONS, type Submission } from '@/lib/mock-data'
+import type { Submission } from '@/lib/mock-data'
 import { StatsCards } from '@/components/dashboard/StatsCards'
 import { FilterBar, type Filters } from '@/components/dashboard/FilterBar'
 import { SubmissionsTable } from '@/components/dashboard/SubmissionsTable'
@@ -10,20 +10,40 @@ import { SubmissionPanel } from '@/components/dashboard/SubmissionPanel'
 
 export default function DashboardPage() {
   const router = useRouter()
+  const [submissions, setSubmissions] = useState<Submission[]>([])
   const [selected, setSelected] = useState<Submission | null>(null)
   const [filters, setFilters] = useState<Filters>({
     search: '', category: '', province: '', urgency: '', status: '',
   })
 
-  useEffect(() => {
-    if (typeof window !== 'undefined' && !sessionStorage.getItem('cseri_admin')) {
+  const fetchSubmissions = useCallback(async () => {
+    const res = await fetch('/api/submissions')
+    if (res.status === 401) {
       router.replace('/admin/login')
+      return
+    }
+    if (res.ok) {
+      const data = await res.json() as Submission[]
+      setSubmissions(data)
     }
   }, [router])
 
-  function handleLogout() {
-    sessionStorage.removeItem('cseri_admin')
+  useEffect(() => {
+    fetchSubmissions()
+    const interval = setInterval(fetchSubmissions, 15_000)
+    return () => clearInterval(interval)
+  }, [fetchSubmissions])
+
+  async function handleLogout() {
+    await fetch('/api/admin/logout', { method: 'POST' })
     router.push('/admin/login')
+  }
+
+  function handleStatusChange(updatedSubmission: Submission) {
+    setSubmissions((prev) =>
+      prev.map((s) => (s.id === updatedSubmission.id ? updatedSubmission : s))
+    )
+    setSelected(updatedSubmission)
   }
 
   return (
@@ -42,10 +62,10 @@ export default function DashboardPage() {
       </nav>
 
       <div className="max-w-7xl mx-auto px-4 py-8 space-y-6">
-        <StatsCards submissions={MOCK_SUBMISSIONS} />
+        <StatsCards submissions={submissions} />
         <FilterBar filters={filters} onChange={setFilters} />
         <SubmissionsTable
-          submissions={MOCK_SUBMISSIONS}
+          submissions={submissions}
           filters={filters}
           onSelect={setSelected}
         />
@@ -57,7 +77,11 @@ export default function DashboardPage() {
             className="fixed inset-0 bg-black/30 z-40"
             onClick={() => setSelected(null)}
           />
-          <SubmissionPanel submission={selected} onClose={() => setSelected(null)} />
+          <SubmissionPanel
+            submission={selected}
+            onClose={() => setSelected(null)}
+            onStatusChange={handleStatusChange}
+          />
         </>
       )}
     </div>
