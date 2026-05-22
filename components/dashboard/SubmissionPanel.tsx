@@ -15,10 +15,23 @@ interface SubmissionPanelProps {
   submission: Submission
   onClose: () => void
   onStatusChange?: (updated: Submission) => void
+  onDelete?: (id: string) => void
 }
 
-export function SubmissionPanel({ submission, onClose, onStatusChange }: SubmissionPanelProps) {
+export function SubmissionPanel({ submission, onClose, onStatusChange, onDelete }: SubmissionPanelProps) {
   const [updating, setUpdating] = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState(false)
+  const [deleting, setDeleting] = useState(false)
+
+  async function handleDelete() {
+    setDeleting(true)
+    const res = await fetch(`/api/submissions/${submission.id}`, { method: 'DELETE' })
+    if (res.ok) {
+      onDelete?.(submission.id)
+      onClose()
+    }
+    setDeleting(false)
+  }
 
   async function handleStatusChange(status: Status) {
     if (status === submission.status || updating) return
@@ -112,7 +125,7 @@ export function SubmissionPanel({ submission, onClose, onStatusChange }: Submiss
           </div>
         )}
 
-        <div className="border-t pt-4">
+        <div className="border-t pt-4 flex items-center justify-between gap-4">
           <a
             href={`/api/pdf/${submission.reference_no}`}
             target="_blank"
@@ -121,6 +134,32 @@ export function SubmissionPanel({ submission, onClose, onStatusChange }: Submiss
           >
             Download PDF (excludes contact details — POPIA compliant)
           </a>
+
+          {confirmDelete ? (
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-gray-500">Are you sure?</span>
+              <button
+                onClick={handleDelete}
+                disabled={deleting}
+                className="text-xs bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700 disabled:opacity-50"
+              >
+                {deleting ? 'Deleting…' : 'Yes, delete'}
+              </button>
+              <button
+                onClick={() => setConfirmDelete(false)}
+                className="text-xs text-gray-500 hover:text-gray-700 px-2 py-1"
+              >
+                Cancel
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => setConfirmDelete(true)}
+              className="text-xs text-red-600 hover:text-red-800 font-medium"
+            >
+              Delete
+            </button>
+          )}
         </div>
       </div>
     </div>

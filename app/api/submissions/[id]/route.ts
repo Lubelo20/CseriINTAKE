@@ -39,3 +39,24 @@ export async function PATCH(
   }
   return NextResponse.json({ ok: true })
 }
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  const authError = await requireAdminAuth(request)
+  if (authError) return authError
+
+  const { id } = await params
+
+  const supabase = createServerSupabaseClient()
+  const { error } = await supabase
+    .from('submissions')
+    .delete()
+    .eq('id', id)
+
+  if (error) {
+    return NextResponse.json({ error: 'Database error' }, { status: 500 })
+  }
+  return NextResponse.json({ ok: true })
+}

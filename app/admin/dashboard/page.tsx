@@ -47,6 +47,11 @@ export default function DashboardPage() {
     setSelected(updatedSubmission)
   }
 
+  function handleDelete(id: string) {
+    setSubmissions((prev) => prev.filter((s) => s.id !== id))
+    setSelected(null)
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-cseri-dark text-white px-6 py-2 flex items-center justify-between border-b-4 border-cseri-green">
@@ -88,6 +93,7 @@ export default function DashboardPage() {
             submission={selected}
             onClose={() => setSelected(null)}
             onStatusChange={handleStatusChange}
+            onDelete={handleDelete}
           />
         </>
       )}
