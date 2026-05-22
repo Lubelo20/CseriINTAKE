@@ -1,0 +1,76 @@
+import type { Submission } from '@/lib/mock-data'
+import { Badge } from '@/components/ui/Badge'
+
+const URGENCY_BADGE: Record<string, 'red' | 'orange' | 'blue' | 'gray'> = {
+  critical: 'red', high: 'orange', medium: 'blue', low: 'gray',
+}
+
+interface SubmissionPanelProps {
+  submission: Submission | null
+  onClose: () => void
+}
+
+export function SubmissionPanel({ submission, onClose }: SubmissionPanelProps) {
+  if (!submission) return null
+
+  return (
+    <div className="fixed inset-y-0 right-0 w-full sm:w-[480px] bg-white shadow-2xl z-50 overflow-y-auto">
+      <div className="bg-cseri-navy text-white px-6 py-4 flex items-center justify-between">
+        <div>
+          <p className="font-bold">{submission.reference_no}</p>
+          <p className="text-xs text-blue-200">{new Date(submission.created_at).toLocaleDateString()}</p>
+        </div>
+        <button onClick={onClose} className="text-white hover:text-blue-200 text-2xl leading-none">&times;</button>
+      </div>
+
+      <div className="p-6 space-y-6">
+        <div className="flex flex-wrap gap-2">
+          <Badge variant="navy">{submission.category}</Badge>
+          <Badge variant="navy">{submission.province.toUpperCase()}</Badge>
+          <Badge variant={URGENCY_BADGE[submission.urgency] ?? 'gray'}>{submission.urgency}</Badge>
+          <Badge variant={submission.status === 'matched' ? 'green' : submission.status === 'closed' ? 'gray' : 'blue'}>
+            {submission.status}
+          </Badge>
+        </div>
+
+        <div>
+          <h3 className="text-xs font-semibold uppercase text-gray-400 mb-2">Contact Details</h3>
+          <div className="space-y-1 text-sm">
+            <p><span className="font-medium">Name:</span> {submission.full_name}</p>
+            {submission.email && <p><span className="font-medium">Email:</span> {submission.email}</p>}
+            {submission.phone && <p><span className="font-medium">Phone:</span> {submission.phone}</p>}
+            {submission.organisation && <p><span className="font-medium">Organisation:</span> {submission.organisation}</p>}
+            <p><span className="font-medium">Role:</span> {submission.role.replace(/_/g, ' ')}</p>
+            <p><span className="font-medium">Language:</span> {submission.language_used.toUpperCase()}</p>
+          </div>
+        </div>
+
+        <div>
+          <h3 className="text-xs font-semibold uppercase text-gray-400 mb-2">Challenge</h3>
+          <h4 className="font-semibold text-cseri-navy mb-1">{submission.challenge_title}</h4>
+          <p className="text-sm text-gray-700 leading-relaxed">{submission.challenge_description}</p>
+        </div>
+
+        {submission.proposed_solution && (
+          <div>
+            <h3 className="text-xs font-semibold uppercase text-gray-400 mb-2">Proposed Solution</h3>
+            <p className="text-sm text-gray-700 leading-relaxed">{submission.proposed_solution}</p>
+          </div>
+        )}
+
+        {submission.background_info && (
+          <div>
+            <h3 className="text-xs font-semibold uppercase text-gray-400 mb-2">Background</h3>
+            <p className="text-sm text-gray-700 leading-relaxed">{submission.background_info}</p>
+          </div>
+        )}
+
+        {submission.suits_intl_students && (
+          <div className="bg-blue-50 rounded-lg p-3 text-sm text-cseri-blue">
+            ✓ Suitable for international student projects
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
