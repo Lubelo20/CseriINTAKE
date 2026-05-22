@@ -43,7 +43,7 @@ export function SubmissionsTable({ submissions, filters, onSelect }: Submissions
           <tr className="bg-gray-50 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide">
             <th className="px-4 py-3">Reference</th>
             <th className="px-4 py-3">Date</th>
-            <th className="px-4 py-3">Role</th>
+            <th className="px-4 py-3">Name</th>
             <th className="px-4 py-3">Category</th>
             <th className="px-4 py-3">Province</th>
             <th className="px-4 py-3">Urgency</th>
@@ -59,7 +59,7 @@ export function SubmissionsTable({ submissions, filters, onSelect }: Submissions
             >
               <td className="px-4 py-3 font-mono text-xs font-semibold text-cseri-navy">{s.reference_no}</td>
               <td className="px-4 py-3 text-gray-500">{new Date(s.created_at).toLocaleDateString()}</td>
-              <td className="px-4 py-3 text-gray-600 capitalize">{s.role.replace(/_/g, ' ')}</td>
+              <td className="px-4 py-3 text-gray-800 font-medium">{s.full_name}</td>
               <td className="px-4 py-3"><Badge variant="navy">{s.category}</Badge></td>
               <td className="px-4 py-3"><Badge variant="navy">{s.province.toUpperCase()}</Badge></td>
               <td className="px-4 py-3">

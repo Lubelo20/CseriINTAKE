@@ -8,6 +8,7 @@ import { StatsCards } from '@/components/dashboard/StatsCards'
 import { FilterBar, type Filters } from '@/components/dashboard/FilterBar'
 import { SubmissionsTable } from '@/components/dashboard/SubmissionsTable'
 import { SubmissionPanel } from '@/components/dashboard/SubmissionPanel'
+import { NotificationsPanel } from '@/components/dashboard/NotificationsPanel'
 
 export default function DashboardPage() {
   const router = useRouter()
@@ -75,6 +76,7 @@ export default function DashboardPage() {
 
       <div className="max-w-7xl mx-auto px-4 py-8 space-y-6">
         <StatsCards submissions={submissions} />
+        <NotificationsPanel />
         <FilterBar filters={filters} onChange={setFilters} />
         <SubmissionsTable
           submissions={submissions}

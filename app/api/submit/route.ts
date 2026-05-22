@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createServerSupabaseClient } from '@/lib/supabase'
-import { sendSubmissionEmail } from '@/lib/email'
+import { sendSubmissionEmail, sendConfirmationEmail } from '@/lib/email'
 import { step3Schema, step4Schema } from '@/lib/schemas'
 import { ROLES } from '@/lib/constants'
 
@@ -77,7 +77,17 @@ export async function POST(request: NextRequest) {
     category: challenge.category,
     province: challenge.province,
     urgency: challenge.urgency,
-  }).catch((err) => console.error('Email send failed:', err))
+    proposed_solution: challenge.proposed_solution ?? '',
+    suits_intl_students: challenge.suits_intl_students,
+  }).catch((err) => console.error('Notification email failed:', err))
+
+  if (contact.email) {
+    sendConfirmationEmail({
+      to: contact.email,
+      reference_no,
+      challenge_title: challenge.challenge_title,
+    }).catch((err) => console.error('Confirmation email failed:', err))
+  }
 
   return NextResponse.json({ reference_no })
 }
