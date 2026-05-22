@@ -1,13 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  --color-cseri-navy: #142444;
-  --color-cseri-orange: #F07A1A;
-  --color-cseri-blue: #2667B1;
+  /* Real CSERI brand colours from cseri.co.za */
+  --color-cseri-green:  #9ABF35;  /* primary — CSERI signature olive green */
+  --color-cseri-orange: #E38642;  /* secondary accent */
+  --color-cseri-teal:   #52ADC3;  /* tertiary accent */
+  --color-cseri-yellow: #FFCF05;  /* highlight */
+  --color-cseri-dark:   #181717;  /* headings, nav backgrounds */
+  --color-cseri-grey:   #6b6b6c;  /* body text */
+
+  /* Keep legacy aliases so existing classes still resolve */
+  --color-cseri-navy:   #181717;
+  --color-cseri-blue:   #52ADC3;
 }
 
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-900 antialiased;
+    @apply bg-gray-50 text-cseri-dark antialiased;
   }
 }

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 export default function AdminLoginPage() {
   const router = useRouter()
@@ -29,13 +30,17 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-cseri-navy flex items-center justify-center p-4">
+    <div className="min-h-screen bg-cseri-dark flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-cseri-orange rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-white font-bold text-2xl">C</span>
-          </div>
-          <h1 className="text-xl font-bold text-cseri-navy">CSERI Admin</h1>
+          <Image
+            src="/logo.png"
+            alt="CSERI"
+            width={200}
+            height={58}
+            className="h-14 w-auto object-contain mx-auto mb-4"
+          />
+          <h1 className="text-xl font-bold text-cseri-dark">Admin Portal</h1>
           <p className="text-sm text-gray-500 mt-1">Community Intake Dashboard</p>
         </div>
 

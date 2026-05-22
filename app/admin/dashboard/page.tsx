@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import type { Submission } from '@/lib/mock-data'
 import { StatsCards } from '@/components/dashboard/StatsCards'
 import { FilterBar, type Filters } from '@/components/dashboard/FilterBar'
@@ -48,17 +49,23 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <nav className="bg-cseri-navy text-white px-6 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-cseri-orange rounded-full flex items-center justify-center font-bold text-sm">C</div>
-          <div>
-            <p className="font-bold text-sm">CSERI Admin Dashboard</p>
-            <p className="text-xs text-blue-200">Community Intake</p>
-          </div>
+      <nav className="bg-cseri-dark text-white px-6 py-2 flex items-center justify-between border-b-4 border-cseri-green">
+        <Image
+          src="/logo.png"
+          alt="CSERI"
+          width={160}
+          height={46}
+          className="h-10 w-auto object-contain"
+        />
+        <div className="flex items-center gap-4">
+          <span className="text-xs text-gray-300">Admin Dashboard</span>
+          <button
+            onClick={handleLogout}
+            className="text-xs bg-cseri-green text-white px-3 py-1.5 rounded-md hover:opacity-90 transition-opacity font-medium"
+          >
+            Logout
+          </button>
         </div>
-        <button onClick={handleLogout} className="text-sm text-blue-200 hover:text-white transition-colors">
-          Logout
-        </button>
       </nav>
 
       <div className="max-w-7xl mx-auto px-4 py-8 space-y-6">

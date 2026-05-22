@@ -6,7 +6,7 @@ import { locales } from './navigation'
 const intlMiddleware = createMiddleware({ locales, defaultLocale: 'en' })
 const JWT_COOKIE = 'cseri_admin_token'
 
-export default async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Protect admin pages — skip only the login page to avoid redirect loop
