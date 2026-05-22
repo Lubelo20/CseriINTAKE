@@ -11,4 +11,16 @@ const config: Config = {
   },
 }
 
-export default createJestConfig(config)
+// Wrap to override transformIgnorePatterns so ESM-only packages are transpiled
+const makeConfig = createJestConfig(config)
+
+export default async () => {
+  const jestConfig = await (makeConfig as () => Promise<Config>)()
+  return {
+    ...jestConfig,
+    transformIgnorePatterns: [
+      '/node_modules/(?!(next-intl|use-intl|intl-messageformat|@formatjs)/).*/',
+      '^.+\\.module\\.(css|sass|scss)$',
+    ],
+  }
+}
