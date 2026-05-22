@@ -30,7 +30,7 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-cseri-dark flex items-center justify-center p-4">
+    <div className="min-h-screen bg-green-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-sm">
         <div className="text-center mb-8">
           <Image
