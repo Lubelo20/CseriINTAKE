@@ -55,11 +55,14 @@ export function SubmissionsTable({ submissions, filters, onSelect }: Submissions
             <tr
               key={s.id}
               onClick={() => onSelect(s)}
-              className="hover:bg-blue-50 cursor-pointer transition-colors"
+              className="hover:bg-green-50 cursor-pointer transition-colors"
             >
-              <td className="px-4 py-3 font-mono text-xs font-semibold text-cseri-navy">{s.reference_no}</td>
-              <td className="px-4 py-3 text-gray-500">{new Date(s.created_at).toLocaleDateString()}</td>
-              <td className="px-4 py-3 text-gray-800 font-medium">{s.full_name}</td>
+              <td className="px-4 py-3 font-mono text-xs font-semibold text-cseri-dark">{s.reference_no}</td>
+              <td className="px-4 py-3 text-gray-500 text-xs">{new Date(s.created_at).toLocaleDateString()}</td>
+              <td className="px-4 py-3">
+                <p className="text-gray-800 font-medium text-sm">{s.full_name}</p>
+                <p className="text-gray-400 text-xs truncate max-w-[180px]">{s.challenge_title}</p>
+              </td>
               <td className="px-4 py-3"><Badge variant="navy">{s.category}</Badge></td>
               <td className="px-4 py-3"><Badge variant="navy">{s.province.toUpperCase()}</Badge></td>
               <td className="px-4 py-3">

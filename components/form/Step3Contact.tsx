@@ -29,7 +29,7 @@ export function Step3Contact() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div>
-        <h2 className="text-xl font-bold text-cseri-navy">{t('title')}</h2>
+        <h2 className="text-xl font-bold text-cseri-dark">{t('title')}</h2>
         <p className="text-sm text-gray-500 mt-1">{t('subtitle')}</p>
       </div>
 
@@ -40,18 +40,18 @@ export function Step3Contact() {
           {...register('full_name')}
         />
         <Input
-          label={t('email')}
+          label={`${t('email')} (optional)`}
           type="email"
           error={errors.email?.message}
           {...register('email')}
         />
         <Input
-          label={t('phone')}
+          label={`${t('phone')} (optional)`}
           type="tel"
           {...register('phone')}
         />
         <Input
-          label={t('organisation')}
+          label={`${t('organisation')} (optional)`}
           {...register('organisation')}
         />
       </div>

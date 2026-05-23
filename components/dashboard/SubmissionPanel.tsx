@@ -49,12 +49,12 @@ export function SubmissionPanel({ submission, onClose, onStatusChange, onDelete 
 
   return (
     <div className="fixed inset-y-0 right-0 w-full sm:w-[480px] bg-white shadow-2xl z-50 overflow-y-auto">
-      <div className="bg-cseri-navy text-white px-6 py-4 flex items-center justify-between">
+      <div className="bg-cseri-dark text-white px-6 py-4 flex items-center justify-between">
         <div>
           <p className="font-bold">{submission.reference_no}</p>
-          <p className="text-xs text-blue-200">{new Date(submission.created_at).toLocaleDateString()}</p>
+          <p className="text-xs text-gray-300">{new Date(submission.created_at).toLocaleDateString()}</p>
         </div>
-        <button onClick={onClose} className="text-white hover:text-blue-200 text-2xl leading-none">&times;</button>
+        <button onClick={onClose} className="text-white hover:text-gray-300 text-2xl leading-none">&times;</button>
       </div>
 
       <div className="p-6 space-y-6">
@@ -77,8 +77,8 @@ export function SubmissionPanel({ submission, onClose, onStatusChange, onDelete 
                 disabled={s === submission.status || updating}
                 className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors
                   ${s === submission.status
-                    ? 'bg-cseri-navy text-white border-cseri-navy cursor-default'
-                    : 'bg-white text-gray-600 border-gray-300 hover:border-cseri-navy hover:text-cseri-navy disabled:opacity-40'
+                    ? 'bg-cseri-dark text-white border-cseri-dark cursor-default'
+                    : 'bg-white text-gray-600 border-gray-300 hover:border-cseri-dark hover:text-cseri-dark disabled:opacity-40'
                   }`}
               >
                 {s}
@@ -101,7 +101,7 @@ export function SubmissionPanel({ submission, onClose, onStatusChange, onDelete 
 
         <div>
           <h3 className="text-xs font-semibold uppercase text-gray-400 mb-2">Challenge</h3>
-          <h4 className="font-semibold text-cseri-navy mb-1">{submission.challenge_title}</h4>
+          <h4 className="font-semibold text-cseri-dark mb-1">{submission.challenge_title}</h4>
           <p className="text-sm text-gray-700 leading-relaxed">{submission.challenge_description}</p>
         </div>
 
@@ -120,7 +120,7 @@ export function SubmissionPanel({ submission, onClose, onStatusChange, onDelete 
         )}
 
         {submission.suits_intl_students && (
-          <div className="bg-blue-50 rounded-lg p-3 text-sm text-cseri-blue">
+          <div className="bg-green-50 rounded-lg p-3 text-sm text-cseri-green">
             ✓ Suitable for international student projects
           </div>
         )}
@@ -130,7 +130,7 @@ export function SubmissionPanel({ submission, onClose, onStatusChange, onDelete 
             href={`/api/pdf/${submission.reference_no}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-cseri-blue underline hover:text-cseri-navy"
+            className="text-sm text-cseri-teal underline hover:text-cseri-dark"
           >
             Download PDF (excludes contact details — POPIA compliant)
           </a>

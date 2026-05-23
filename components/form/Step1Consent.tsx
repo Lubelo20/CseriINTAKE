@@ -19,10 +19,10 @@ export function Step1Consent() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-bold text-cseri-navy">{t('title')}</h2>
+        <h2 className="text-xl font-bold text-cseri-dark">{t('title')}</h2>
         <p className="text-sm text-gray-500 mt-1">{t('subtitle')}</p>
       </div>
-      <div className="bg-blue-50 border border-cseri-blue/20 rounded-lg p-4 text-sm text-gray-700 leading-relaxed">
+      <div className="bg-green-50 border border-cseri-green/30 rounded-lg p-4 text-sm text-gray-700 leading-relaxed">
         {t('body')}
       </div>
       <label className="flex items-start gap-3 cursor-pointer">

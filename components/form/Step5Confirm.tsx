@@ -27,11 +27,11 @@ export function Step5Confirm() {
       </div>
 
       <div>
-        <h2 className="text-2xl font-bold text-cseri-navy">{t('title')}</h2>
+        <h2 className="text-2xl font-bold text-cseri-dark">{t('title')}</h2>
         <p className="text-gray-500 mt-1">{t('subtitle')}</p>
       </div>
 
-      <div className="bg-cseri-navy text-white rounded-xl p-6">
+      <div className="bg-cseri-dark text-white rounded-xl p-6">
         <p className="text-sm text-blue-200 mb-1">{t('referenceLabel')}</p>
         <p className="text-3xl font-bold tracking-wider">{referenceNo}</p>
       </div>
@@ -51,7 +51,7 @@ export function Step5Confirm() {
       )}
 
       <div className="bg-orange-50 border border-cseri-orange/20 rounded-lg p-4 text-left space-y-2">
-        <h3 className="font-semibold text-cseri-navy text-sm">{t('summaryTitle')}</h3>
+        <h3 className="font-semibold text-cseri-dark text-sm">{t('summaryTitle')}</h3>
         <ul className="text-sm text-gray-600 space-y-1">
           <li>• {t('next1')}</li>
           <li>• {t('next2')}</li>
@@ -65,7 +65,7 @@ export function Step5Confirm() {
             href={`/api/pdf/${referenceNo}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 border border-cseri-navy text-cseri-navy px-4 py-2 rounded-md text-sm font-medium hover:bg-cseri-navy hover:text-white transition-colors"
+            className="inline-flex items-center justify-center gap-2 border border-cseri-dark text-cseri-dark px-4 py-2 rounded-md text-sm font-medium hover:bg-cseri-dark hover:text-white transition-colors"
           >
             {t('downloadPdf')}
           </a>

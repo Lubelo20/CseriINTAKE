@@ -10,6 +10,44 @@ import { SubmissionsTable } from '@/components/dashboard/SubmissionsTable'
 import { SubmissionPanel } from '@/components/dashboard/SubmissionPanel'
 import { NotificationsPanel } from '@/components/dashboard/NotificationsPanel'
 
+function exportCSV(submissions: Submission[]) {
+  const headers = [
+    'Reference', 'Date', 'Status', 'Full Name', 'Email', 'Phone',
+    'Organisation', 'Role', 'Language', 'Category', 'Province', 'Urgency',
+    'Challenge Title', 'Challenge Description', 'Proposed Solution',
+    'Background Info', 'Suits Intl Students',
+  ]
+  const rows = submissions.map((s) => [
+    s.reference_no,
+    new Date(s.created_at).toLocaleDateString('en-ZA'),
+    s.status,
+    s.full_name,
+    s.email,
+    s.phone,
+    s.organisation,
+    s.role.replace(/_/g, ' '),
+    s.language_used.toUpperCase(),
+    s.category,
+    s.province.toUpperCase(),
+    s.urgency,
+    s.challenge_title,
+    s.challenge_description,
+    s.proposed_solution,
+    s.background_info,
+    s.suits_intl_students ? 'Yes' : 'No',
+  ])
+  const csv = [headers, ...rows]
+    .map((row) => row.map((cell) => `"${String(cell ?? '').replace(/"/g, '""')}"`).join(','))
+    .join('\n')
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `cseri-submissions-${new Date().toISOString().split('T')[0]}.csv`
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
 export default function DashboardPage() {
   const router = useRouter()
   const [submissions, setSubmissions] = useState<Submission[]>([])
@@ -63,8 +101,15 @@ export default function DashboardPage() {
           height={46}
           className="h-10 w-auto object-contain"
         />
-        <div className="flex items-center gap-4">
-          <span className="text-xs text-gray-300">Admin Dashboard</span>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-gray-300 hidden sm:block">Admin Dashboard</span>
+          <button
+            onClick={() => exportCSV(submissions)}
+            disabled={submissions.length === 0}
+            className="text-xs border border-white/30 text-white px-3 py-1.5 rounded-md hover:bg-white/10 transition-colors disabled:opacity-40 font-medium"
+          >
+            Export CSV
+          </button>
           <button
             onClick={handleLogout}
             className="text-xs bg-cseri-green text-white px-3 py-1.5 rounded-md hover:opacity-90 transition-opacity font-medium"
