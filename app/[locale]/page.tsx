@@ -10,7 +10,7 @@ export default async function IntakePage({
 
   return (
     <FormProvider locale={locale}>
-      <div className="max-w-2xl mx-auto px-4 py-8">
+      <div className="max-w-2xl mx-auto px-4 py-6 sm:py-8">
 
         {/* Hero intro */}
         <div className="mb-8 text-center">

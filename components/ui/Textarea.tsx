@@ -20,14 +20,14 @@ export function Textarea({ label, error, hint, className, id, ...props }: Textar
         id={inputId}
         rows={4}
         className={cn(
-          'w-full rounded-md border px-3 py-2 text-sm shadow-sm transition-colors resize-y',
-          'focus:outline-none focus:ring-2 focus:ring-cseri-blue focus:border-cseri-blue',
+          'w-full rounded-md border px-3 py-2.5 text-sm shadow-sm transition-colors resize-y',
+          'focus:outline-none focus:ring-2 focus:ring-cseri-teal focus:border-cseri-teal',
           error ? 'border-red-500' : 'border-gray-300',
           className,
         )}
         {...props}
       />
-      {error && <p className="text-xs text-red-600">{error}</p>}
+      {error && <p className="text-xs text-red-600 mt-1">{error}</p>}
     </div>
   )
 }

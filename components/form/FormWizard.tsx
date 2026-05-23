@@ -15,7 +15,7 @@ export function FormWizard() {
   const StepComponent = STEPS[currentStep - 1]
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8">
+    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 sm:p-8">
       <div className="mb-8">
         <ProgressBar currentStep={currentStep} />
       </div>

@@ -19,8 +19,8 @@ export function Select({ label, error, placeholder, options, className, id, ...p
       <select
         id={inputId}
         className={cn(
-          'w-full rounded-md border px-3 py-2 text-sm shadow-sm transition-colors bg-white',
-          'focus:outline-none focus:ring-2 focus:ring-cseri-blue focus:border-cseri-blue',
+          'w-full rounded-md border px-3 py-2.5 text-sm shadow-sm transition-colors bg-white min-h-[44px]',
+          'focus:outline-none focus:ring-2 focus:ring-cseri-teal focus:border-cseri-teal',
           error ? 'border-red-500' : 'border-gray-300',
           className,
         )}
@@ -31,7 +31,7 @@ export function Select({ label, error, placeholder, options, className, id, ...p
           <option key={value} value={value}>{label}</option>
         ))}
       </select>
-      {error && <p className="text-xs text-red-600">{error}</p>}
+      {error && <p className="text-xs text-red-600 mt-1">{error}</p>}
     </div>
   )
 }

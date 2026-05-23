@@ -57,7 +57,7 @@ export function SubmissionPanel({ submission, onClose, onStatusChange, onDelete 
         <button onClick={onClose} className="text-white hover:text-gray-300 text-2xl leading-none">&times;</button>
       </div>
 
-      <div className="p-6 space-y-6">
+      <div className="p-4 sm:p-6 space-y-6">
         <div className="flex flex-wrap gap-2">
           <Badge variant="navy">{submission.category}</Badge>
           <Badge variant="navy">{submission.province.toUpperCase()}</Badge>
@@ -89,13 +89,13 @@ export function SubmissionPanel({ submission, onClose, onStatusChange, onDelete 
 
         <div>
           <h3 className="text-xs font-semibold uppercase text-gray-400 mb-2">Contact Details</h3>
-          <div className="space-y-1 text-sm">
-            <p><span className="font-medium">Name:</span> {submission.full_name}</p>
-            {submission.email && <p><span className="font-medium">Email:</span> {submission.email}</p>}
-            {submission.phone && <p><span className="font-medium">Phone:</span> {submission.phone}</p>}
-            {submission.organisation && <p><span className="font-medium">Organisation:</span> {submission.organisation}</p>}
-            <p><span className="font-medium">Role:</span> {submission.role.replace(/_/g, ' ')}</p>
-            <p><span className="font-medium">Language:</span> {submission.language_used.toUpperCase()}</p>
+          <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 text-sm">
+            <span className="font-medium text-gray-500">Name</span><span className="text-gray-800 break-words">{submission.full_name}</span>
+            {submission.email && <><span className="font-medium text-gray-500">Email</span><a href={`mailto:${submission.email}`} className="text-cseri-teal break-all hover:underline">{submission.email}</a></>}
+            {submission.phone && <><span className="font-medium text-gray-500">Phone</span><span className="text-gray-800">{submission.phone}</span></>}
+            {submission.organisation && <><span className="font-medium text-gray-500">Org</span><span className="text-gray-800">{submission.organisation}</span></>}
+            <span className="font-medium text-gray-500">Role</span><span className="text-gray-800 capitalize">{submission.role.replace(/_/g, ' ')}</span>
+            <span className="font-medium text-gray-500">Language</span><span className="text-gray-800">{submission.language_used.toUpperCase()}</span>
           </div>
         </div>
 
@@ -125,14 +125,14 @@ export function SubmissionPanel({ submission, onClose, onStatusChange, onDelete 
           </div>
         )}
 
-        <div className="border-t pt-4 flex items-center justify-between gap-4">
+        <div className="border-t pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <a
             href={`/api/pdf/${submission.reference_no}`}
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-cseri-teal underline hover:text-cseri-dark"
           >
-            Download PDF (excludes contact details — POPIA compliant)
+            Download PDF (POPIA compliant)
           </a>
 
           {confirmDelete ? (

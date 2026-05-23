@@ -26,7 +26,7 @@ function resend() {
 }
 
 const FROM = () => process.env.RESEND_FROM_EMAIL ?? 'onboarding@resend.dev'
-const NOTIFICATION_EMAIL = () => process.env.NOTIFICATION_EMAIL ?? 'solomonn@dut.ac.za'
+const NOTIFICATION_EMAIL = () => process.env.NOTIFICATION_EMAIL ?? 'info@lubelotechsolutions.co.za'
 const APP_URL = () => process.env.NEXT_PUBLIC_APP_URL ?? 'https://cseri-intake.vercel.app'
 
 export interface NewSubmissionParams {
