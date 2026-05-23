@@ -13,7 +13,7 @@ import { NotificationsPanel } from '@/components/dashboard/NotificationsPanel'
 function exportCSV(submissions: Submission[]) {
   const headers = [
     'Reference', 'Date', 'Status', 'Full Name', 'Email', 'Phone',
-    'Organisation', 'Role', 'Language', 'Category', 'Province', 'Urgency',
+    'Organisation', 'Role', 'Language', 'Sector', 'Province', 'Urgency',
     'Challenge Title', 'Challenge Description', 'Proposed Solution',
     'Background Info', 'Suits Intl Students',
   ]

@@ -61,7 +61,7 @@ export async function sendSubmissionEmail(p: NewSubmissionParams): Promise<void>
 
         <table style="width:100%;border-collapse:collapse;margin-bottom:20px;font-size:13px">
           <tr style="border-bottom:1px solid #f3f4f6">
-            <td style="padding:7px 0;color:#6b7280;width:36%">Category</td>
+            <td style="padding:7px 0;color:#6b7280;width:36%">Sector</td>
             <td style="padding:7px 0;color:${DARK};font-weight:600">${p.category}</td>
           </tr>
           <tr style="border-bottom:1px solid #f3f4f6">

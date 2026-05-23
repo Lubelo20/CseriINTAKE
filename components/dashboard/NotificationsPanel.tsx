@@ -25,36 +25,27 @@ export function NotificationsPanel() {
         onClick={() => setOpen((o) => !o)}
         className="w-full flex items-center justify-between px-5 py-4 text-left"
       >
-        <div className="flex items-center gap-3">
-          <span className="text-lg">🔔</span>
-          <div>
-            <p className="text-sm font-semibold text-cseri-dark">Email Notifications</p>
-            <p className="text-xs text-gray-400">3 notification types active</p>
-          </div>
+        <div>
+          <p className="text-sm font-semibold text-cseri-dark">Email Notifications</p>
+          <p className="text-xs text-gray-400 mt-0.5">3 notification types active</p>
         </div>
-        <span className="text-gray-400 text-sm">{open ? '▲' : '▼'}</span>
+        <span className="text-gray-400 text-xs font-medium">{open ? 'Collapse' : 'Expand'}</span>
       </button>
 
       {open && (
         <div className="border-t border-gray-100 px-5 py-4 space-y-4">
           <div className="space-y-3">
             <NotifRow
-              icon="📥"
-              title="New submission alerts"
+              label="New submission alerts"
               description="Sent to the CSERI team when a new intake form is submitted. Includes full contact details and challenge info."
-              active
             />
             <NotifRow
-              icon="✉️"
-              title="Submitter confirmation"
+              label="Submitter confirmation"
               description="Sent automatically to the submitter (if they provided an email) confirming receipt and their reference number."
-              active
             />
             <NotifRow
-              icon="🔄"
-              title="Status update emails"
+              label="Status update emails"
               description="Sent to the submitter when their status changes to Reviewing, Matched, or Closed."
-              active
             />
           </div>
 
@@ -62,7 +53,7 @@ export function NotificationsPanel() {
             <div className="flex-1">
               <p className="text-xs font-medium text-gray-500">Notification recipient</p>
               <p className="text-sm text-cseri-dark font-mono mt-0.5">
-                {process.env.NEXT_PUBLIC_NOTIFICATION_EMAIL ?? 'solomonn@dut.ac.za'}
+                info@lubelotechsolutions.co.za
               </p>
               <p className="text-xs text-gray-400 mt-1">
                 Change via <code className="bg-gray-100 px-1 rounded">NOTIFICATION_EMAIL</code> in Vercel environment variables
@@ -77,10 +68,10 @@ export function NotificationsPanel() {
                 {sending ? 'Sending…' : 'Send test email'}
               </button>
               {testResult === 'ok' && (
-                <p className="text-xs text-green-600 mt-1">✓ Test email sent</p>
+                <p className="text-xs text-green-600 mt-1">Test email sent successfully</p>
               )}
               {testResult === 'error' && (
-                <p className="text-xs text-red-600 mt-1">✗ Failed — check logs</p>
+                <p className="text-xs text-red-600 mt-1">Failed — check server logs</p>
               )}
             </div>
           </div>
@@ -90,22 +81,15 @@ export function NotificationsPanel() {
   )
 }
 
-function NotifRow({
-  icon, title, description, active,
-}: {
-  icon: string
-  title: string
-  description: string
-  active: boolean
-}) {
+function NotifRow({ label, description }: { label: string; description: string }) {
   return (
     <div className="flex items-start gap-3">
-      <span className="text-base mt-0.5">{icon}</span>
+      <div className="mt-1.5 shrink-0 w-2 h-2 rounded-full bg-cseri-green" />
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <p className="text-sm font-medium text-cseri-dark">{title}</p>
-          <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
-            {active ? 'Active' : 'Off'}
+          <p className="text-sm font-medium text-cseri-dark">{label}</p>
+          <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-green-100 text-green-700">
+            Active
           </span>
         </div>
         <p className="text-xs text-gray-500 leading-relaxed mt-0.5">{description}</p>

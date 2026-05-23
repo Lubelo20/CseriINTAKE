@@ -35,8 +35,8 @@ export function SubmissionsTable({ submissions, filters, onSelect }: Submissions
   if (filtered.length === 0) {
     return (
       <div className="text-center text-gray-400 py-16 bg-white rounded-xl border border-gray-200">
-        <p className="text-3xl mb-2">🔍</p>
-        <p className="text-sm">No submissions match your filters</p>
+        <p className="text-sm font-medium text-gray-500">No submissions match your filters</p>
+        <p className="text-xs text-gray-400 mt-1">Try adjusting your search or filter criteria</p>
       </div>
     )
   }
@@ -49,7 +49,7 @@ export function SubmissionsTable({ submissions, filters, onSelect }: Submissions
             <th className="px-4 py-3">Reference</th>
             <th className="px-4 py-3 hidden sm:table-cell">Date</th>
             <th className="px-4 py-3">Submitter</th>
-            <th className="px-4 py-3 hidden md:table-cell">Category</th>
+            <th className="px-4 py-3 hidden md:table-cell">Sector</th>
             <th className="px-4 py-3 hidden lg:table-cell">Province</th>
             <th className="px-4 py-3 hidden sm:table-cell">Urgency</th>
             <th className="px-4 py-3">Status</th>
@@ -75,17 +75,17 @@ export function SubmissionsTable({ submissions, filters, onSelect }: Submissions
                 </p>
               </td>
               <td className="px-4 py-3 hidden md:table-cell">
-                <Badge variant="navy">{s.category}</Badge>
+                <Badge variant="navy">{s.category.charAt(0).toUpperCase() + s.category.slice(1)}</Badge>
               </td>
               <td className="px-4 py-3 hidden lg:table-cell">
                 <Badge variant="navy">{s.province.toUpperCase()}</Badge>
               </td>
               <td className="px-4 py-3 hidden sm:table-cell">
-                <Badge variant={URGENCY_BADGE[s.urgency] ?? 'gray'}>{s.urgency}</Badge>
+                <Badge variant={URGENCY_BADGE[s.urgency] ?? 'gray'}>{s.urgency.charAt(0).toUpperCase() + s.urgency.slice(1)}</Badge>
               </td>
               <td className="px-4 py-3">
                 <Badge variant={s.status === 'matched' ? 'green' : s.status === 'closed' ? 'gray' : 'blue'}>
-                  {s.status}
+                  {s.status.charAt(0).toUpperCase() + s.status.slice(1)}
                 </Badge>
               </td>
             </tr>

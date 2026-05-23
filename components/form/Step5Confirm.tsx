@@ -22,8 +22,10 @@ export function Step5Confirm() {
 
   return (
     <div className="space-y-6 text-center">
-      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-        <span className="text-3xl">✓</span>
+      <div className="w-16 h-16 bg-cseri-green rounded-full flex items-center justify-center mx-auto">
+        <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
       </div>
 
       <div>
@@ -39,10 +41,10 @@ export function Step5Confirm() {
       {formData.challenge && (
         <div className="bg-gray-50 rounded-lg p-4 text-left space-y-3">
           <div className="flex flex-wrap gap-2">
-            <Badge variant="navy">{formData.challenge.category}</Badge>
-            <Badge variant="navy">{formData.challenge.province}</Badge>
+            <Badge variant="navy">{formData.challenge.category.charAt(0).toUpperCase() + formData.challenge.category.slice(1)}</Badge>
+            <Badge variant="navy">{formData.challenge.province.toUpperCase()}</Badge>
             <Badge variant={URGENCY_BADGE[formData.challenge.urgency] ?? 'gray'}>
-              {formData.challenge.urgency}
+              {formData.challenge.urgency.charAt(0).toUpperCase() + formData.challenge.urgency.slice(1)}
             </Badge>
           </div>
           <p className="text-sm font-semibold text-gray-800">{formData.challenge.challenge_title}</p>

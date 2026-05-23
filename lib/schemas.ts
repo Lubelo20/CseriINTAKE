@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { CATEGORIES, PROVINCES, URGENCY_LEVELS, ROLES } from './constants'
+import { SECTORS, PROVINCES, URGENCY_LEVELS, ROLES } from './constants'
 
 export const step2Schema = z.object({
   role: z.enum(ROLES),
@@ -15,7 +15,7 @@ export const step3Schema = z.object({
 export const step4Schema = z.object({
   challenge_title: z.string().min(1, 'Challenge title is required'),
   challenge_description: z.string().min(1, 'Challenge description is required'),
-  category: z.enum(CATEGORIES),
+  category: z.enum(SECTORS),
   province: z.enum(PROVINCES),
   urgency: z.enum(URGENCY_LEVELS),
   proposed_solution: z.string().optional().default(''),

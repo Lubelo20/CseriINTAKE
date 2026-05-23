@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl'
 import { z } from 'zod'
 import { useFormContext } from '@/lib/form-context'
 import { step4Schema, type Step4Data } from '@/lib/schemas'
-import { CATEGORIES, PROVINCES, URGENCY_LEVELS } from '@/lib/constants'
+import { SECTORS, PROVINCES, URGENCY_LEVELS } from '@/lib/constants'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
@@ -17,7 +17,7 @@ type Step4Input = z.input<typeof step4Schema>
 export function Step4Challenge() {
   const t = useTranslations('step4')
   const tc = useTranslations('common')
-  const tCat = useTranslations('categories')
+  const tSec = useTranslations('sectors')
   const tProv = useTranslations('provinces')
   const tUrg = useTranslations('urgency')
   const { prevStep, submitAndAdvance, formData, isSubmitting, submissionError } = useFormContext()
@@ -51,7 +51,7 @@ export function Step4Challenge() {
     await submitAndAdvance(data as Step4Data)
   }
 
-  const categoryOptions = CATEGORIES.map((c) => ({ value: c, label: tCat(c) }))
+  const categoryOptions = SECTORS.map((c) => ({ value: c, label: tSec(c) }))
   const provinceOptions = PROVINCES.map((p) => ({ value: p, label: tProv(p) }))
   const urgencyOptions = URGENCY_LEVELS.map((u) => ({ value: u, label: tUrg(u) }))
 
@@ -76,8 +76,8 @@ export function Step4Challenge() {
         />
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <Select
-            label={t('category')}
-            placeholder={t('selectCategory')}
+            label={t('sector')}
+            placeholder={t('selectSector')}
             options={categoryOptions}
             error={errors.category?.message}
             {...register('category')}

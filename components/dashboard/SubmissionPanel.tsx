@@ -59,11 +59,11 @@ export function SubmissionPanel({ submission, onClose, onStatusChange, onDelete 
 
       <div className="p-4 sm:p-6 space-y-6">
         <div className="flex flex-wrap gap-2">
-          <Badge variant="navy">{submission.category}</Badge>
+          <Badge variant="navy">{submission.category.charAt(0).toUpperCase() + submission.category.slice(1)}</Badge>
           <Badge variant="navy">{submission.province.toUpperCase()}</Badge>
-          <Badge variant={URGENCY_BADGE[submission.urgency] ?? 'gray'}>{submission.urgency}</Badge>
+          <Badge variant={URGENCY_BADGE[submission.urgency] ?? 'gray'}>{submission.urgency.charAt(0).toUpperCase() + submission.urgency.slice(1)}</Badge>
           <Badge variant={submission.status === 'matched' ? 'green' : submission.status === 'closed' ? 'gray' : 'blue'}>
-            {submission.status}
+            {submission.status.charAt(0).toUpperCase() + submission.status.slice(1)}
           </Badge>
         </div>
 
@@ -81,7 +81,7 @@ export function SubmissionPanel({ submission, onClose, onStatusChange, onDelete 
                     : 'bg-white text-gray-600 border-gray-300 hover:border-cseri-dark hover:text-cseri-dark disabled:opacity-40'
                   }`}
               >
-                {s}
+                {s.charAt(0).toUpperCase() + s.slice(1)}
               </button>
             ))}
           </div>

@@ -1,4 +1,4 @@
-export const CATEGORIES = [
+export const SECTORS = [
   'health', 'education', 'agriculture', 'technology',
   'finance', 'housing', 'employment', 'environment', 'safety', 'other',
 ] as const
@@ -25,7 +25,7 @@ export const LOCALES = [
   { code: 'nr', name: 'isiNdebele' },
 ] as const
 
-export type Category = (typeof CATEGORIES)[number]
+export type Sector = (typeof SECTORS)[number]
 export type Province = (typeof PROVINCES)[number]
 export type UrgencyLevel = (typeof URGENCY_LEVELS)[number]
 export type Role = (typeof ROLES)[number]

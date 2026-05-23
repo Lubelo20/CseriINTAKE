@@ -116,10 +116,10 @@ export function SubmissionPDF({ submission }: SubmissionPDFProps) {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Submission Details</Text>
           <View style={styles.badgeRow}>
-            <View style={styles.badge}><Text>{submission.category}</Text></View>
+            <View style={styles.badge}><Text>{submission.category.charAt(0).toUpperCase() + submission.category.slice(1)}</Text></View>
             <View style={styles.badge}><Text>{submission.province.toUpperCase()}</Text></View>
             <View style={{ ...styles.badgeOrange, backgroundColor: urgencyColour }}>
-              <Text>{submission.urgency}</Text>
+              <Text>{submission.urgency.charAt(0).toUpperCase() + submission.urgency.slice(1)}</Text>
             </View>
             <View style={styles.badge}><Text>{submission.role.replace(/_/g, ' ')}</Text></View>
           </View>

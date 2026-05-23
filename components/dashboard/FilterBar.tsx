@@ -1,6 +1,6 @@
 'use client'
 
-import { CATEGORIES, PROVINCES, URGENCY_LEVELS } from '@/lib/constants'
+import { SECTORS, PROVINCES, URGENCY_LEVELS } from '@/lib/constants'
 
 export type Filters = {
   search: string
@@ -33,8 +33,8 @@ export function FilterBar({ filters, onChange }: FilterBarProps) {
       />
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <select value={filters.category} onChange={(e) => update('category', e.target.value)} className={selectClass}>
-          <option value="">All Categories</option>
-          {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+          <option value="">All Sectors</option>
+          {SECTORS.map((c) => <option key={c} value={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</option>)}
         </select>
         <select value={filters.province} onChange={(e) => update('province', e.target.value)} className={selectClass}>
           <option value="">All Provinces</option>
@@ -42,11 +42,11 @@ export function FilterBar({ filters, onChange }: FilterBarProps) {
         </select>
         <select value={filters.urgency} onChange={(e) => update('urgency', e.target.value)} className={selectClass}>
           <option value="">All Urgencies</option>
-          {URGENCY_LEVELS.map((u) => <option key={u} value={u}>{u}</option>)}
+          {URGENCY_LEVELS.map((u) => <option key={u} value={u}>{u.charAt(0).toUpperCase() + u.slice(1)}</option>)}
         </select>
         <select value={filters.status} onChange={(e) => update('status', e.target.value)} className={selectClass}>
           <option value="">All Statuses</option>
-          {['new', 'reviewing', 'matched', 'closed'].map((s) => <option key={s} value={s}>{s}</option>)}
+          {['new', 'reviewing', 'matched', 'closed'].map((s) => <option key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</option>)}
         </select>
       </div>
     </div>
